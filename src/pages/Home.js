@@ -8,7 +8,7 @@ import { WebAssetOutlined } from "@mui/icons-material";
 
 const Home = () => {
   // We need to have these two lines of code because changes in these
-  // states will reflect changes across all of our WebAssetOutlined, not just in the
+  // states will reflect changes across all of our website, not just in the
   // SearchExercises component
   const [bodyPart, setBodyPart] = useState("all");
   const [exercises, setExercises] = useState([]);
