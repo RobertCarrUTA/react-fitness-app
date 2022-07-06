@@ -1,12 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 
+import { exerciseOptions, fetchData } from "../utils/fetchData";
+import Exercises from "./Exercises";
+
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
+  const [exercises, setExercises] = useState([]);
+  const [bodyParts, setBodyParts] = useState([]);
+
+  useEffect(() => {
+    const fetchExerciseData = async () => {
+      const bodyPartsData = await fetchData(
+        "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
+        exerciseOptions
+      );
+
+      setBodyParts(["all", ...bodyPartsData]);
+    };
+
+    fetchExerciseData();
+  }, []);
 
   const handleSearch = async () => {
     if (search) {
-      // const exercisesData = await fetchData();
+      const exercisesData = await fetchData(
+        "https://exercisedb.p.rapidapi.com/exercises",
+        exerciseOptions
+      );
+
+      // Filter the data from the search query
+      const searchedExercises = exercisesData.filter(
+        (exercise) =>
+          exercise.name.toLowerCase().includes(search) ||
+          exercise.target.toLowerCase().includes(search) ||
+          exercise.equipment.toLowerCase().includes(search) ||
+          exercise.bodyPart.toLowerCase().includes(search)
+      );
+
+      setSearch("");
+      setExercises(searchedExercises);
     }
   };
 
@@ -53,6 +86,8 @@ const SearchExercises = () => {
           Search
         </Button>
       </Box>
+      {/* Create a new additional box below the search bar that contains the search results */}
+      <Box sx={{ position: "relative", width: "100%", p: "20px" }}></Box>
     </Stack>
   );
 };
