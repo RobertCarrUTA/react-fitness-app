@@ -7,11 +7,19 @@ import Exercises from "./Exercises";
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
   const [exercises, setExercises] = useState([]);
+  const [bodyParts, setBodyParts] = useState([]);
 
   useEffect(() => {
     const fetchExerciseData = async () => {
-      // const bodyPartsData = await fetchData('')
+      const bodyPartsData = await fetchData(
+        "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
+        exerciseOptions
+      );
+
+      setBodyParts(["all", ...bodyPartsData]);
     };
+
+    fetchExerciseData();
   }, []);
 
   const handleSearch = async () => {
@@ -21,7 +29,8 @@ const SearchExercises = () => {
         exerciseOptions
       );
 
-      const searchedExercises = exerciseData.filter(
+      // Filter the data from the search query
+      const searchedExercises = exercisesData.filter(
         (exercise) =>
           exercise.name.toLowerCase().includes(search) ||
           exercise.target.toLowerCase().includes(search) ||
@@ -77,6 +86,8 @@ const SearchExercises = () => {
           Search
         </Button>
       </Box>
+      {/* Create a new additional box below the search bar that contains the search results */}
+      <Box sx={{ position: "relative", width: "100%", p: "20px" }}></Box>
     </Stack>
   );
 };
