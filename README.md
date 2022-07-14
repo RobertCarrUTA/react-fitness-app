@@ -1,4 +1,4 @@
-*README.md is still under construction (the project is still not completed)*
+*README.md is still under construction (the project is completed, the README is not)*
 # About
 Using React and Rapid API, the project creates a modern fitness and exercise web application. [ExerciseDB](https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/), [Youtube Search and Download](https://rapidapi.com/h0p3rwe/api/youtube-search-and-download/), and [Rapid API](https://rapidapi.com/) provide quick and easy access to a wide variety of exercise data. As a result, this web application can return an abundance of results when users search for exercises, muscle groups, body parts, or types of equipment. 
 
